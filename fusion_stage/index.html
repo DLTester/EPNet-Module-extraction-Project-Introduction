@@ -1,0 +1,2761 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="../geometry_stage/">
+      
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.23">
+    
+    
+      
+        <title>融合阶段 - EPNet Li-Fusion 文档</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.84d31ad4.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/_mkdocstrings.css">
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#fusion-stage" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="EPNet Li-Fusion 文档" class="md-header__button md-logo" aria-label="EPNet Li-Fusion 文档" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            EPNet Li-Fusion 文档
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              融合阶段
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="EPNet Li-Fusion 文档" class="md-nav__button md-logo" aria-label="EPNet Li-Fusion 文档" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    EPNet Li-Fusion 文档
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    首页
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Li-Fusion 模块
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            Li-Fusion 模块
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../li_fusion_framework/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    框架结构
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../geometry_stage/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    几何阶段
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    融合阶段
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    融合阶段
+    
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      模块说明
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#api" class="md-nav__link">
+    <span class="md-ellipsis">
+      API 自动生成
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="API 自动生成">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      基础融合算子
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#fusion_stage.align_fusion_stage.li_fusion_add" class="md-nav__link">
+    <span class="md-ellipsis">
+      li_fusion_add
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#fusion_stage.align_fusion_stage.li_fusion_add.li_fusion_add" class="md-nav__link">
+    <span class="md-ellipsis">
+      li_fusion_add
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="li_fusion_add">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#fusion_stage.align_fusion_stage.li_fusion_add.li_fusion_add--li-fusion-add-tanh" class="md-nav__link">
+    <span class="md-ellipsis">
+      Li-Fusion Add（逐元素加法 + 可选 tanh 激活）
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Li-Fusion Add（逐元素加法 + 可选 tanh 激活）">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#fusion_stage.align_fusion_stage.li_fusion_add.li_fusion_add--args" class="md-nav__link">
+    <span class="md-ellipsis">
+      参数 (Args)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#fusion_stage.align_fusion_stage.li_fusion_add.li_fusion_add--returns" class="md-nav__link">
+    <span class="md-ellipsis">
+      返回 (Returns)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#fusion_stage.align_fusion_stage.li_fusion_add.li_fusion_add--notes" class="md-nav__link">
+    <span class="md-ellipsis">
+      说明 (Notes)
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#fusion_stage.li_fusion_muti" class="md-nav__link">
+    <span class="md-ellipsis">
+      li_fusion_muti
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#fusion_stage.li_fusion_muti.li_fusion_muti" class="md-nav__link">
+    <span class="md-ellipsis">
+      li_fusion_muti
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="li_fusion_muti">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#fusion_stage.li_fusion_muti.li_fusion_muti--li-fusion-multiply" class="md-nav__link">
+    <span class="md-ellipsis">
+      Li-Fusion Multiply（门控加权算子）
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Li-Fusion Multiply（门控加权算子）">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#fusion_stage.li_fusion_muti.li_fusion_muti--_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      功能说明
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#fusion_stage.li_fusion_muti.li_fusion_muti--args" class="md-nav__link">
+    <span class="md-ellipsis">
+      参数 (Args)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#fusion_stage.li_fusion_muti.li_fusion_muti--returns" class="md-nav__link">
+    <span class="md-ellipsis">
+      输出 (Returns)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#fusion_stage.li_fusion_muti.li_fusion_muti--formula" class="md-nav__link">
+    <span class="md-ellipsis">
+      数学公式 (Formula)
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#fusion_stage.li_fusion_concat" class="md-nav__link">
+    <span class="md-ellipsis">
+      li_fusion_concat
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#fusion_stage.li_fusion_concat.li_fusion_concat" class="md-nav__link">
+    <span class="md-ellipsis">
+      li_fusion_concat
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="li_fusion_concat">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#fusion_stage.li_fusion_concat.li_fusion_concat--li-fusion-concat" class="md-nav__link">
+    <span class="md-ellipsis">
+      Li-Fusion Concat（跨模态特征拼接算子）
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Li-Fusion Concat（跨模态特征拼接算子）">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#fusion_stage.li_fusion_concat.li_fusion_concat--_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      功能说明
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#fusion_stage.li_fusion_concat.li_fusion_concat--args" class="md-nav__link">
+    <span class="md-ellipsis">
+      参数 (Args)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#fusion_stage.li_fusion_concat.li_fusion_concat--returns" class="md-nav__link">
+    <span class="md-ellipsis">
+      输出 (Returns)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#fusion_stage.li_fusion_concat.li_fusion_concat--formula" class="md-nav__link">
+    <span class="md-ellipsis">
+      数学描述 (Formula)
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#fusion_stage.feature_weight_fc" class="md-nav__link">
+    <span class="md-ellipsis">
+      feature_weight_fc
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#fusion_stage.feature_weight_fc.FeatureWeightFC" class="md-nav__link">
+    <span class="md-ellipsis">
+      FeatureWeightFC
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="FeatureWeightFC">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#fusion_stage.feature_weight_fc.FeatureWeightFC--featureweightfc" class="md-nav__link">
+    <span class="md-ellipsis">
+      FeatureWeightFC 算子（权重图生成层）
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      对齐模块
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#fusion_stage.align_fusion_stage.align_fc.fc_align_i" class="md-nav__link">
+    <span class="md-ellipsis">
+      fc_align_i
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#fusion_stage.align_fusion_stage.align_fc.fc_align_i.FCAlignI" class="md-nav__link">
+    <span class="md-ellipsis">
+      FCAlignI
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="FCAlignI">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#fusion_stage.align_fusion_stage.align_fc.fc_align_i.FCAlignI--fcaligni" class="md-nav__link">
+    <span class="md-ellipsis">
+      FCAlignI（图像特征通道对齐层）
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="FCAlignI（图像特征通道对齐层）">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#fusion_stage.align_fusion_stage.align_fc.fc_align_i.FCAlignI--_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      功能说明
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#fusion_stage.align_fusion_stage.align_fc.fc_align_i.FCAlignI--args" class="md-nav__link">
+    <span class="md-ellipsis">
+      参数（Args）
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#fusion_stage.align_fusion_stage.align_fc.fc_align_i.FCAlignI--input" class="md-nav__link">
+    <span class="md-ellipsis">
+      输入（Input）
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#fusion_stage.align_fusion_stage.align_fc.fc_align_i.FCAlignI--output" class="md-nav__link">
+    <span class="md-ellipsis">
+      输出（Output）
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#fusion_stage.align_fusion_stage.align_fc.fc_align_i.FCAlignI--formula" class="md-nav__link">
+    <span class="md-ellipsis">
+      数学关系（Formula）
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#fusion_stage.align_fusion_stage.align_fc.fc_align_i.FCAlignI--_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      典型用途
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#fusion_stage.align_fusion_stage.align_fc.fc_align_p" class="md-nav__link">
+    <span class="md-ellipsis">
+      fc_align_p
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#fusion_stage.align_fusion_stage.align_fc.fc_align_p.FCAlignP" class="md-nav__link">
+    <span class="md-ellipsis">
+      FCAlignP
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="FCAlignP">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#fusion_stage.align_fusion_stage.align_fc.fc_align_p.FCAlignP--fcalignp" class="md-nav__link">
+    <span class="md-ellipsis">
+      FCAlignP（点云特征通道对齐层）
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="FCAlignP（点云特征通道对齐层）">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#fusion_stage.align_fusion_stage.align_fc.fc_align_p.FCAlignP--_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      功能说明
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#fusion_stage.align_fusion_stage.align_fc.fc_align_p.FCAlignP--args" class="md-nav__link">
+    <span class="md-ellipsis">
+      参数（Args）
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#fusion_stage.align_fusion_stage.align_fc.fc_align_p.FCAlignP--input" class="md-nav__link">
+    <span class="md-ellipsis">
+      输入（Input）
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#fusion_stage.align_fusion_stage.align_fc.fc_align_p.FCAlignP--output" class="md-nav__link">
+    <span class="md-ellipsis">
+      输出（Output）
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#fusion_stage.align_fusion_stage.align_fc.fc_align_p.FCAlignP--formula" class="md-nav__link">
+    <span class="md-ellipsis">
+      数学关系（Formula）
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#fusion_stage.align_fusion_stage.align_fc.fc_align_p.FCAlignP--_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      典型用途
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      模块说明
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#api" class="md-nav__link">
+    <span class="md-ellipsis">
+      API 自动生成
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="API 自动生成">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      基础融合算子
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#fusion_stage.align_fusion_stage.li_fusion_add" class="md-nav__link">
+    <span class="md-ellipsis">
+      li_fusion_add
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#fusion_stage.align_fusion_stage.li_fusion_add.li_fusion_add" class="md-nav__link">
+    <span class="md-ellipsis">
+      li_fusion_add
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="li_fusion_add">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#fusion_stage.align_fusion_stage.li_fusion_add.li_fusion_add--li-fusion-add-tanh" class="md-nav__link">
+    <span class="md-ellipsis">
+      Li-Fusion Add（逐元素加法 + 可选 tanh 激活）
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Li-Fusion Add（逐元素加法 + 可选 tanh 激活）">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#fusion_stage.align_fusion_stage.li_fusion_add.li_fusion_add--args" class="md-nav__link">
+    <span class="md-ellipsis">
+      参数 (Args)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#fusion_stage.align_fusion_stage.li_fusion_add.li_fusion_add--returns" class="md-nav__link">
+    <span class="md-ellipsis">
+      返回 (Returns)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#fusion_stage.align_fusion_stage.li_fusion_add.li_fusion_add--notes" class="md-nav__link">
+    <span class="md-ellipsis">
+      说明 (Notes)
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#fusion_stage.li_fusion_muti" class="md-nav__link">
+    <span class="md-ellipsis">
+      li_fusion_muti
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#fusion_stage.li_fusion_muti.li_fusion_muti" class="md-nav__link">
+    <span class="md-ellipsis">
+      li_fusion_muti
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="li_fusion_muti">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#fusion_stage.li_fusion_muti.li_fusion_muti--li-fusion-multiply" class="md-nav__link">
+    <span class="md-ellipsis">
+      Li-Fusion Multiply（门控加权算子）
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Li-Fusion Multiply（门控加权算子）">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#fusion_stage.li_fusion_muti.li_fusion_muti--_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      功能说明
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#fusion_stage.li_fusion_muti.li_fusion_muti--args" class="md-nav__link">
+    <span class="md-ellipsis">
+      参数 (Args)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#fusion_stage.li_fusion_muti.li_fusion_muti--returns" class="md-nav__link">
+    <span class="md-ellipsis">
+      输出 (Returns)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#fusion_stage.li_fusion_muti.li_fusion_muti--formula" class="md-nav__link">
+    <span class="md-ellipsis">
+      数学公式 (Formula)
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#fusion_stage.li_fusion_concat" class="md-nav__link">
+    <span class="md-ellipsis">
+      li_fusion_concat
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#fusion_stage.li_fusion_concat.li_fusion_concat" class="md-nav__link">
+    <span class="md-ellipsis">
+      li_fusion_concat
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="li_fusion_concat">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#fusion_stage.li_fusion_concat.li_fusion_concat--li-fusion-concat" class="md-nav__link">
+    <span class="md-ellipsis">
+      Li-Fusion Concat（跨模态特征拼接算子）
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Li-Fusion Concat（跨模态特征拼接算子）">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#fusion_stage.li_fusion_concat.li_fusion_concat--_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      功能说明
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#fusion_stage.li_fusion_concat.li_fusion_concat--args" class="md-nav__link">
+    <span class="md-ellipsis">
+      参数 (Args)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#fusion_stage.li_fusion_concat.li_fusion_concat--returns" class="md-nav__link">
+    <span class="md-ellipsis">
+      输出 (Returns)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#fusion_stage.li_fusion_concat.li_fusion_concat--formula" class="md-nav__link">
+    <span class="md-ellipsis">
+      数学描述 (Formula)
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#fusion_stage.feature_weight_fc" class="md-nav__link">
+    <span class="md-ellipsis">
+      feature_weight_fc
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#fusion_stage.feature_weight_fc.FeatureWeightFC" class="md-nav__link">
+    <span class="md-ellipsis">
+      FeatureWeightFC
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="FeatureWeightFC">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#fusion_stage.feature_weight_fc.FeatureWeightFC--featureweightfc" class="md-nav__link">
+    <span class="md-ellipsis">
+      FeatureWeightFC 算子（权重图生成层）
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      对齐模块
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#fusion_stage.align_fusion_stage.align_fc.fc_align_i" class="md-nav__link">
+    <span class="md-ellipsis">
+      fc_align_i
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#fusion_stage.align_fusion_stage.align_fc.fc_align_i.FCAlignI" class="md-nav__link">
+    <span class="md-ellipsis">
+      FCAlignI
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="FCAlignI">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#fusion_stage.align_fusion_stage.align_fc.fc_align_i.FCAlignI--fcaligni" class="md-nav__link">
+    <span class="md-ellipsis">
+      FCAlignI（图像特征通道对齐层）
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="FCAlignI（图像特征通道对齐层）">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#fusion_stage.align_fusion_stage.align_fc.fc_align_i.FCAlignI--_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      功能说明
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#fusion_stage.align_fusion_stage.align_fc.fc_align_i.FCAlignI--args" class="md-nav__link">
+    <span class="md-ellipsis">
+      参数（Args）
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#fusion_stage.align_fusion_stage.align_fc.fc_align_i.FCAlignI--input" class="md-nav__link">
+    <span class="md-ellipsis">
+      输入（Input）
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#fusion_stage.align_fusion_stage.align_fc.fc_align_i.FCAlignI--output" class="md-nav__link">
+    <span class="md-ellipsis">
+      输出（Output）
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#fusion_stage.align_fusion_stage.align_fc.fc_align_i.FCAlignI--formula" class="md-nav__link">
+    <span class="md-ellipsis">
+      数学关系（Formula）
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#fusion_stage.align_fusion_stage.align_fc.fc_align_i.FCAlignI--_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      典型用途
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#fusion_stage.align_fusion_stage.align_fc.fc_align_p" class="md-nav__link">
+    <span class="md-ellipsis">
+      fc_align_p
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#fusion_stage.align_fusion_stage.align_fc.fc_align_p.FCAlignP" class="md-nav__link">
+    <span class="md-ellipsis">
+      FCAlignP
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="FCAlignP">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#fusion_stage.align_fusion_stage.align_fc.fc_align_p.FCAlignP--fcalignp" class="md-nav__link">
+    <span class="md-ellipsis">
+      FCAlignP（点云特征通道对齐层）
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="FCAlignP（点云特征通道对齐层）">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#fusion_stage.align_fusion_stage.align_fc.fc_align_p.FCAlignP--_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      功能说明
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#fusion_stage.align_fusion_stage.align_fc.fc_align_p.FCAlignP--args" class="md-nav__link">
+    <span class="md-ellipsis">
+      参数（Args）
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#fusion_stage.align_fusion_stage.align_fc.fc_align_p.FCAlignP--input" class="md-nav__link">
+    <span class="md-ellipsis">
+      输入（Input）
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#fusion_stage.align_fusion_stage.align_fc.fc_align_p.FCAlignP--output" class="md-nav__link">
+    <span class="md-ellipsis">
+      输出（Output）
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#fusion_stage.align_fusion_stage.align_fc.fc_align_p.FCAlignP--formula" class="md-nav__link">
+    <span class="md-ellipsis">
+      数学关系（Formula）
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#fusion_stage.align_fusion_stage.align_fc.fc_align_p.FCAlignP--_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      典型用途
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="fusion-stage">Fusion Stage 模块</h1>
+<h2 id="_1">模块说明</h2>
+<p>融合阶段（Fusion Stage）负责点云与图像特征的跨模态融合。
+其主要功能包括特征对齐、特征加权与融合操作。</p>
+<p>本阶段包含以下子模块：</p>
+<ul>
+<li><code>li_fusion_add</code> — 特征相加并可选 tanh 激活；</li>
+<li><code>li_fusion_muti</code> — 特征门控/加权乘法；</li>
+<li><code>li_fusion_concat</code> — 通道拼接融合；</li>
+<li><code>feature_weight_fc</code> — 通道注意力权重计算；</li>
+<li><code>align_fusion_stage</code> — 点云与图像对齐模块：</li>
+<li><code>fc_align_i</code> — 图像通道对齐；</li>
+<li><code>fc_align_p</code> — 点云通道对齐。</li>
+</ul>
+<hr />
+<h2 id="api">API 自动生成</h2>
+<h3 id="_2">基础融合算子</h3>
+
+
+<div class="doc doc-object doc-module">
+
+
+
+<a id="fusion_stage.align_fusion_stage.li_fusion_add"></a>
+    <div class="doc doc-contents first">
+
+
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+<div class="doc doc-object doc-function">
+
+
+<h2 id="fusion_stage.align_fusion_stage.li_fusion_add.li_fusion_add" class="doc doc-heading">
+            <code class="highlight language-python"><span class="n">li_fusion_add</span><span class="p">(</span><span class="n">Fp</span><span class="p">,</span> <span class="n">Fi</span><span class="p">,</span> <span class="n">apply_tanh</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span></code>
+
+</h2>
+
+
+    <div class="doc doc-contents ">
+
+        <h3 id="fusion_stage.align_fusion_stage.li_fusion_add.li_fusion_add--li-fusion-add-tanh">Li-Fusion Add（逐元素加法 + 可选 tanh 激活）</h3>
+<p>将两路对齐后的逐点特征（通常为点云支路 <code>Fp</code> 与图像支路 <code>Fi</code>）进行逐元素相加；
+若 <code>apply_tanh=True</code>，在加法结果上施加 <code>tanh</code> 激活以增强非线性与数值稳定性。
+本算子无可学习参数，是 Li-Fusion 中“Add + tanh”步骤的基础融合算子。</p>
+<hr />
+<h5 id="fusion_stage.align_fusion_stage.li_fusion_add.li_fusion_add--args">参数 (Args)</h5>
+<ul>
+<li>
+<p><strong>Fp</strong> (<code>torch.Tensor</code>):
+  第一输入张量，形状 <code>(B, D, N)</code>，通常为点云分支对齐后的特征。</p>
+</li>
+<li>
+<p><strong>Fi</strong> (<code>torch.Tensor</code>):
+  第二输入张量，形状 <code>(B, D, N)</code>，通常为图像分支对齐后的特征。</p>
+<blockquote>
+<p>要求与 <code>Fp</code> <strong>形状一致</strong>；如使用广播，请确保语义正确。</p>
+</blockquote>
+</li>
+<li>
+<p><strong>apply_tanh</strong> (<code>bool</code>, default=<code>True</code>):
+  是否在加法结果上应用 <code>tanh</code> 激活（输出约束在 <code>[-1, 1]</code>）。</p>
+</li>
+</ul>
+<hr />
+<h5 id="fusion_stage.align_fusion_stage.li_fusion_add.li_fusion_add--returns">返回 (Returns)</h5>
+<ul>
+<li><code>torch.Tensor</code>:
+  融合后的输出特征，形状 <code>(B, D, N)</code>；返回前会 <code>clone()</code>，避免与输入共享内存（满足自定义算子约束）。</li>
+</ul>
+<hr />
+<h5 id="fusion_stage.align_fusion_stage.li_fusion_add.li_fusion_add--notes">说明 (Notes)</h5>
+<ul>
+<li>该算子假设 <code>Fp</code> 与 <code>Fi</code> 已完成<strong>通道维度对齐</strong>（例如通过 <code>FCAlignP</code>/<code>FCAlignI</code>）。</li>
+<li>若需更强的稳定性，可考虑在上游加入归一化或在本算子后加入正则化。</li>
+<li>为满足 <code>torch.library.custom_op</code> 返回不与输入别名的要求，输出使用 <code>clone()</code>。</li>
+</ul>
+
+            <details class="quote">
+              <summary>Source code in <code>fusion_stage\align_fusion_stage\li_fusion_add.py</code></summary>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span>
+<span class="normal">20</span>
+<span class="normal">21</span>
+<span class="normal">22</span>
+<span class="normal">23</span>
+<span class="normal">24</span>
+<span class="normal">25</span>
+<span class="normal">26</span>
+<span class="normal">27</span>
+<span class="normal">28</span>
+<span class="normal">29</span>
+<span class="normal">30</span>
+<span class="normal">31</span>
+<span class="normal">32</span>
+<span class="normal">33</span>
+<span class="normal">34</span>
+<span class="normal">35</span>
+<span class="normal">36</span>
+<span class="normal">37</span>
+<span class="normal">38</span>
+<span class="normal">39</span>
+<span class="normal">40</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nd">@torch</span><span class="o">.</span><span class="n">library</span><span class="o">.</span><span class="n">custom_op</span><span class="p">(</span><span class="s2">&quot;li_fusion::add_tanh&quot;</span><span class="p">,</span> <span class="n">mutates_args</span><span class="o">=</span><span class="p">[])</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">li_fusion_add</span><span class="p">(</span><span class="n">Fp</span><span class="p">:</span> <span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">,</span> <span class="n">Fi</span><span class="p">:</span> <span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">,</span> <span class="n">apply_tanh</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Li-Fusion Add（逐元素加法 + 可选 tanh 激活）</span>
+<span class="sd">    ==========================================</span>
+
+<span class="sd">    将两路对齐后的逐点特征（通常为点云支路 `Fp` 与图像支路 `Fi`）进行逐元素相加；</span>
+<span class="sd">    若 `apply_tanh=True`，在加法结果上施加 `tanh` 激活以增强非线性与数值稳定性。</span>
+<span class="sd">    本算子无可学习参数，是 Li-Fusion 中“Add + tanh”步骤的基础融合算子。</span>
+
+<span class="sd">    ---</span>
+<span class="sd">    ### 参数 (Args)</span>
+<span class="sd">    - **Fp** (`torch.Tensor`):</span>
+<span class="sd">      第一输入张量，形状 `(B, D, N)`，通常为点云分支对齐后的特征。</span>
+
+<span class="sd">    - **Fi** (`torch.Tensor`):</span>
+<span class="sd">      第二输入张量，形状 `(B, D, N)`，通常为图像分支对齐后的特征。</span>
+<span class="sd">      &gt; 要求与 `Fp` **形状一致**；如使用广播，请确保语义正确。</span>
+
+<span class="sd">    - **apply_tanh** (`bool`, default=`True`):</span>
+<span class="sd">      是否在加法结果上应用 `tanh` 激活（输出约束在 `[-1, 1]`）。</span>
+
+<span class="sd">    ---</span>
+<span class="sd">    ### 返回 (Returns)</span>
+<span class="sd">    - `torch.Tensor`:</span>
+<span class="sd">      融合后的输出特征，形状 `(B, D, N)`；返回前会 `clone()`，避免与输入共享内存（满足自定义算子约束）。</span>
+
+<span class="sd">    ---</span>
+<span class="sd">    ### 说明 (Notes)</span>
+<span class="sd">    - 该算子假设 `Fp` 与 `Fi` 已完成**通道维度对齐**（例如通过 `FCAlignP`/`FCAlignI`）。</span>
+<span class="sd">    - 若需更强的稳定性，可考虑在上游加入归一化或在本算子后加入正则化。</span>
+<span class="sd">    - 为满足 `torch.library.custom_op` 返回不与输入别名的要求，输出使用 `clone()`。</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">out</span> <span class="o">=</span> <span class="n">Fp</span> <span class="o">+</span> <span class="n">Fi</span>
+    <span class="k">if</span> <span class="n">apply_tanh</span><span class="p">:</span>
+        <span class="n">out</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">tanh</span><span class="p">(</span><span class="n">out</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">out</span><span class="o">.</span><span class="n">clone</span><span class="p">()</span>  <span class="c1"># 避免 alias 报错</span>
+</code></pre></div></td></tr></table></div>
+            </details>
+    </div>
+
+</div>
+
+
+
+  </div>
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-module">
+
+
+
+<a id="fusion_stage.li_fusion_muti"></a>
+    <div class="doc doc-contents first">
+
+
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+<div class="doc doc-object doc-function">
+
+
+<h2 id="fusion_stage.li_fusion_muti.li_fusion_muti" class="doc doc-heading">
+            <code class="highlight language-python"><span class="n">li_fusion_muti</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">sigmoid_y</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span></code>
+
+</h2>
+
+
+    <div class="doc doc-contents ">
+
+        <h3 id="fusion_stage.li_fusion_muti.li_fusion_muti--li-fusion-multiply">Li-Fusion Multiply（门控加权算子）</h3>
+<p>对输入特征 <code>x</code> 与权重 <code>y</code> 逐元素相乘，实现特征加权或门控（Gating）。
+当 <code>sigmoid_y=True</code> 时，对 <code>y</code> 执行 Sigmoid 压缩，使其取值范围限制在 <code>[0, 1]</code>，
+从而模拟可学习的“特征开关”机制。</p>
+<hr />
+<h5 id="fusion_stage.li_fusion_muti.li_fusion_muti--_1">功能说明</h5>
+<ul>
+<li>输入主特征 <code>x</code>（通常为图像特征）与权重图 <code>y</code>；</li>
+<li>若启用 <code>sigmoid_y</code>，则先将 <code>y</code> 映射至 <code>[0,1]</code>；</li>
+<li>输出经门控调制的特征：<code>out = x * y</code>。</li>
+</ul>
+<hr />
+<h5 id="fusion_stage.li_fusion_muti.li_fusion_muti--args">参数 (Args)</h5>
+<ul>
+<li><strong>x</strong> (<code>torch.Tensor</code>):
+  主特征张量。
+  形状 <code>(B, D, N)</code></li>
+<li><code>B</code>: batch 大小</li>
+<li><code>D</code>: 特征通道数</li>
+<li>
+<p><code>N</code>: 点数或像素数</p>
+</li>
+<li>
+<p><strong>y</strong> (<code>torch.Tensor</code>):
+  权重/门控张量。
+  形状 <code>(B, 1, N)</code> 或可广播到 <code>(B, D, N)</code>。
+  通常由 <code>FeatureWeightFC</code> 输出。</p>
+</li>
+<li>
+<p><strong>sigmoid_y</strong> (<code>bool</code>, default=<code>False</code>):
+  是否对 <code>y</code> 进行 Sigmoid 激活。</p>
+</li>
+<li><code>True</code>: 执行 <code>y = sigmoid(y)</code></li>
+<li><code>False</code>: 直接使用原始权重</li>
+</ul>
+<hr />
+<h5 id="fusion_stage.li_fusion_muti.li_fusion_muti--returns">输出 (Returns)</h5>
+<ul>
+<li><strong>out</strong> (<code>torch.Tensor</code>):
+  逐元素乘法后的输出特征，形状 <code>(B, D, N)</code>。
+  表示经门控调制后的主特征（图像或点云）。</li>
+</ul>
+<hr />
+<h5 id="fusion_stage.li_fusion_muti.li_fusion_muti--formula">数学公式 (Formula)</h5>
+<p>对每个点特征 <code>x_i</code> 与权重 <code>y_i</code>：</p>
+<pre><code>if sigmoid_y:
+    y_i = σ(y_i)
+out_i = x_i * y_i
+</code></pre>
+<p>其中 <code>σ(·)</code> 表示 Sigmoid 函数。</p>
+
+            <details class="quote">
+              <summary>Source code in <code>fusion_stage\li_fusion_muti.py</code></summary>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span>
+<span class="normal">20</span>
+<span class="normal">21</span>
+<span class="normal">22</span>
+<span class="normal">23</span>
+<span class="normal">24</span>
+<span class="normal">25</span>
+<span class="normal">26</span>
+<span class="normal">27</span>
+<span class="normal">28</span>
+<span class="normal">29</span>
+<span class="normal">30</span>
+<span class="normal">31</span>
+<span class="normal">32</span>
+<span class="normal">33</span>
+<span class="normal">34</span>
+<span class="normal">35</span>
+<span class="normal">36</span>
+<span class="normal">37</span>
+<span class="normal">38</span>
+<span class="normal">39</span>
+<span class="normal">40</span>
+<span class="normal">41</span>
+<span class="normal">42</span>
+<span class="normal">43</span>
+<span class="normal">44</span>
+<span class="normal">45</span>
+<span class="normal">46</span>
+<span class="normal">47</span>
+<span class="normal">48</span>
+<span class="normal">49</span>
+<span class="normal">50</span>
+<span class="normal">51</span>
+<span class="normal">52</span>
+<span class="normal">53</span>
+<span class="normal">54</span>
+<span class="normal">55</span>
+<span class="normal">56</span>
+<span class="normal">57</span>
+<span class="normal">58</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nd">@torch</span><span class="o">.</span><span class="n">library</span><span class="o">.</span><span class="n">custom_op</span><span class="p">(</span><span class="s2">&quot;li_fusion::multiply_gate&quot;</span><span class="p">,</span> <span class="n">mutates_args</span><span class="o">=</span><span class="p">[])</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">li_fusion_muti</span><span class="p">(</span><span class="n">x</span><span class="p">:</span> <span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">,</span> <span class="n">y</span><span class="p">:</span> <span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">,</span> <span class="n">sigmoid_y</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Li-Fusion Multiply（门控加权算子）</span>
+<span class="sd">    =================================</span>
+
+<span class="sd">    对输入特征 `x` 与权重 `y` 逐元素相乘，实现特征加权或门控（Gating）。</span>
+<span class="sd">    当 `sigmoid_y=True` 时，对 `y` 执行 Sigmoid 压缩，使其取值范围限制在 `[0, 1]`，</span>
+<span class="sd">    从而模拟可学习的“特征开关”机制。</span>
+
+<span class="sd">    ---</span>
+<span class="sd">    ### 功能说明</span>
+<span class="sd">    - 输入主特征 `x`（通常为图像特征）与权重图 `y`；</span>
+<span class="sd">    - 若启用 `sigmoid_y`，则先将 `y` 映射至 `[0,1]`；</span>
+<span class="sd">    - 输出经门控调制的特征：`out = x * y`。</span>
+
+<span class="sd">    ---</span>
+<span class="sd">    ### 参数 (Args)</span>
+<span class="sd">    - **x** (`torch.Tensor`):</span>
+<span class="sd">      主特征张量。</span>
+<span class="sd">      形状 `(B, D, N)`</span>
+<span class="sd">      - `B`: batch 大小</span>
+<span class="sd">      - `D`: 特征通道数</span>
+<span class="sd">      - `N`: 点数或像素数</span>
+
+<span class="sd">    - **y** (`torch.Tensor`):</span>
+<span class="sd">      权重/门控张量。</span>
+<span class="sd">      形状 `(B, 1, N)` 或可广播到 `(B, D, N)`。</span>
+<span class="sd">      通常由 `FeatureWeightFC` 输出。</span>
+
+<span class="sd">    - **sigmoid_y** (`bool`, default=`False`):</span>
+<span class="sd">      是否对 `y` 进行 Sigmoid 激活。</span>
+<span class="sd">      - `True`: 执行 `y = sigmoid(y)`</span>
+<span class="sd">      - `False`: 直接使用原始权重</span>
+
+<span class="sd">    ---</span>
+<span class="sd">    ### 输出 (Returns)</span>
+<span class="sd">    - **out** (`torch.Tensor`):</span>
+<span class="sd">      逐元素乘法后的输出特征，形状 `(B, D, N)`。</span>
+<span class="sd">      表示经门控调制后的主特征（图像或点云）。</span>
+
+<span class="sd">    ---</span>
+<span class="sd">    ### 数学公式 (Formula)</span>
+<span class="sd">    对每个点特征 `x_i` 与权重 `y_i`：</span>
+<span class="sd">    ```</span>
+<span class="sd">    if sigmoid_y:</span>
+<span class="sd">        y_i = σ(y_i)</span>
+<span class="sd">    out_i = x_i * y_i</span>
+<span class="sd">    ```</span>
+<span class="sd">    其中 `σ(·)` 表示 Sigmoid 函数。</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">sigmoid_y</span><span class="p">:</span>
+        <span class="n">y</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">sigmoid</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
+    <span class="n">out</span> <span class="o">=</span> <span class="n">x</span> <span class="o">*</span> <span class="n">y</span>
+    <span class="k">return</span> <span class="n">out</span><span class="o">.</span><span class="n">clone</span><span class="p">()</span>
+</code></pre></div></td></tr></table></div>
+            </details>
+    </div>
+
+</div>
+
+
+
+  </div>
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-module">
+
+
+
+<a id="fusion_stage.li_fusion_concat"></a>
+    <div class="doc doc-contents first">
+
+
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+<div class="doc doc-object doc-function">
+
+
+<h2 id="fusion_stage.li_fusion_concat.li_fusion_concat" class="doc doc-heading">
+            <code class="highlight language-python"><span class="n">li_fusion_concat</span><span class="p">(</span><span class="n">tensors</span><span class="p">,</span> <span class="n">dim</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span></code>
+
+</h2>
+
+
+    <div class="doc doc-contents ">
+
+        <h3 id="fusion_stage.li_fusion_concat.li_fusion_concat--li-fusion-concat">Li-Fusion Concat（跨模态特征拼接算子）</h3>
+<p>将多路特征张量（如点云特征 <code>F_P</code> 与门控后的图像特征 <code>F_Ig</code>）
+沿指定维度拼接，形成联合的跨模态表示。
+通常作为 Li-Fusion 模块融合阶段的<strong>最后一步</strong>，
+用于生成最终融合特征 <code>F_LI</code>。</p>
+<hr />
+<h5 id="fusion_stage.li_fusion_concat.li_fusion_concat--_1">功能说明</h5>
+<ul>
+<li>输入多路模态特征（点云 / 图像 / 权重调制后特征）；</li>
+<li>沿指定维度（默认通道维 <code>dim=1</code>）拼接；</li>
+<li>输出联合特征张量 <code>(B, D_sum, N)</code>，其中 <code>D_sum = Σ D_i</code>。</li>
+</ul>
+<hr />
+<h5 id="fusion_stage.li_fusion_concat.li_fusion_concat--args">参数 (Args)</h5>
+<ul>
+<li><strong>tensors</strong> (<code>List[torch.Tensor]</code>):
+  输入特征列表，每个元素形状相同（除拼接维度外）。
+  常见输入：</li>
+<li><code>F_P</code>  : 点云特征 <code>(B, D_p, N)</code></li>
+<li>
+<p><code>F_Ig</code> : 门控后的图像特征 <code>(B, D_i, N)</code></p>
+</li>
+<li>
+<p><strong>dim</strong> (<code>int</code>, default=<code>1</code>):
+  拼接维度索引。
+  通常取 <code>1</code>，表示通道维拼接。</p>
+</li>
+</ul>
+<hr />
+<h5 id="fusion_stage.li_fusion_concat.li_fusion_concat--returns">输出 (Returns)</h5>
+<ul>
+<li><strong>out</strong> (<code>torch.Tensor</code>):
+  拼接后的输出特征，形状 <strong>(B, D_sum, N)</strong>
+  其中 <code>D_sum = D_p + D_i</code>，代表融合后的通道总数。</li>
+</ul>
+<hr />
+<h5 id="fusion_stage.li_fusion_concat.li_fusion_concat--formula">数学描述 (Formula)</h5>
+<p>对于输入特征序列 <code>{F₁, F₂, …, Fₖ}</code>：</p>
+<pre><code>F_out = Concat(F₁, F₂, …, Fₖ, dim=1)
+</code></pre>
+<p>例如：</p>
+<pre><code>F_LI = Concat(F_P, F_Ig, dim=1)
+</code></pre>
+
+            <details class="quote">
+              <summary>Source code in <code>fusion_stage\li_fusion_concat.py</code></summary>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span>
+<span class="normal">20</span>
+<span class="normal">21</span>
+<span class="normal">22</span>
+<span class="normal">23</span>
+<span class="normal">24</span>
+<span class="normal">25</span>
+<span class="normal">26</span>
+<span class="normal">27</span>
+<span class="normal">28</span>
+<span class="normal">29</span>
+<span class="normal">30</span>
+<span class="normal">31</span>
+<span class="normal">32</span>
+<span class="normal">33</span>
+<span class="normal">34</span>
+<span class="normal">35</span>
+<span class="normal">36</span>
+<span class="normal">37</span>
+<span class="normal">38</span>
+<span class="normal">39</span>
+<span class="normal">40</span>
+<span class="normal">41</span>
+<span class="normal">42</span>
+<span class="normal">43</span>
+<span class="normal">44</span>
+<span class="normal">45</span>
+<span class="normal">46</span>
+<span class="normal">47</span>
+<span class="normal">48</span>
+<span class="normal">49</span>
+<span class="normal">50</span>
+<span class="normal">51</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nd">@torch</span><span class="o">.</span><span class="n">library</span><span class="o">.</span><span class="n">custom_op</span><span class="p">(</span><span class="s2">&quot;li_fusion::concat&quot;</span><span class="p">,</span> <span class="n">mutates_args</span><span class="o">=</span><span class="p">[])</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">li_fusion_concat</span><span class="p">(</span><span class="n">tensors</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">],</span> <span class="n">dim</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Li-Fusion Concat（跨模态特征拼接算子）</span>
+<span class="sd">    =====================================</span>
+
+<span class="sd">    将多路特征张量（如点云特征 `F_P` 与门控后的图像特征 `F_Ig`）</span>
+<span class="sd">    沿指定维度拼接，形成联合的跨模态表示。</span>
+<span class="sd">    通常作为 Li-Fusion 模块融合阶段的**最后一步**，</span>
+<span class="sd">    用于生成最终融合特征 `F_LI`。</span>
+
+<span class="sd">    ---</span>
+<span class="sd">    ### 功能说明</span>
+<span class="sd">    - 输入多路模态特征（点云 / 图像 / 权重调制后特征）；</span>
+<span class="sd">    - 沿指定维度（默认通道维 `dim=1`）拼接；</span>
+<span class="sd">    - 输出联合特征张量 `(B, D_sum, N)`，其中 `D_sum = Σ D_i`。</span>
+
+<span class="sd">    ---</span>
+<span class="sd">    ### 参数 (Args)</span>
+<span class="sd">    - **tensors** (`List[torch.Tensor]`):</span>
+<span class="sd">      输入特征列表，每个元素形状相同（除拼接维度外）。</span>
+<span class="sd">      常见输入：</span>
+<span class="sd">      - `F_P`  : 点云特征 `(B, D_p, N)`</span>
+<span class="sd">      - `F_Ig` : 门控后的图像特征 `(B, D_i, N)`</span>
+
+<span class="sd">    - **dim** (`int`, default=`1`):</span>
+<span class="sd">      拼接维度索引。</span>
+<span class="sd">      通常取 `1`，表示通道维拼接。</span>
+
+<span class="sd">    ---</span>
+<span class="sd">    ### 输出 (Returns)</span>
+<span class="sd">    - **out** (`torch.Tensor`):</span>
+<span class="sd">      拼接后的输出特征，形状 **(B, D_sum, N)**</span>
+<span class="sd">      其中 `D_sum = D_p + D_i`，代表融合后的通道总数。</span>
+
+<span class="sd">    ---</span>
+<span class="sd">    ### 数学描述 (Formula)</span>
+<span class="sd">    对于输入特征序列 `{F₁, F₂, …, Fₖ}`：</span>
+<span class="sd">    ```</span>
+<span class="sd">    F_out = Concat(F₁, F₂, …, Fₖ, dim=1)</span>
+<span class="sd">    ```</span>
+<span class="sd">    例如：</span>
+<span class="sd">    ```</span>
+<span class="sd">    F_LI = Concat(F_P, F_Ig, dim=1)</span>
+<span class="sd">    ```</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">torch</span><span class="o">.</span><span class="n">cat</span><span class="p">(</span><span class="n">tensors</span><span class="p">,</span> <span class="n">dim</span><span class="o">=</span><span class="n">dim</span><span class="p">)</span><span class="o">.</span><span class="n">clone</span><span class="p">()</span>
+</code></pre></div></td></tr></table></div>
+            </details>
+    </div>
+
+</div>
+
+
+
+  </div>
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-module">
+
+
+
+<a id="fusion_stage.feature_weight_fc"></a>
+    <div class="doc doc-contents first">
+
+
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+
+<div class="doc doc-object doc-class">
+
+
+
+<h2 id="fusion_stage.feature_weight_fc.FeatureWeightFC" class="doc doc-heading">
+            <code>FeatureWeightFC</code>
+
+
+</h2>
+
+
+    <div class="doc doc-contents ">
+            <p class="doc doc-class-bases">
+              Bases: <code><span title="torch.nn.Module">Module</span></code></p>
+
+
+        <h4 id="fusion_stage.feature_weight_fc.FeatureWeightFC--featureweightfc">FeatureWeightFC 算子（权重图生成层）</h4>
+<p>【功能说明】
+    该算子用于在 Li-Fusion 模块中，根据融合特征 H 生成逐点权重图 w。
+    其核心操作为一层 1×1 卷积（等价于逐点全连接），
+    用于将高维融合特征映射到单通道权重空间，
+    再通过 Sigmoid 激活函数将输出压缩到 [0, 1] 范围，
+    以表示每个点或像素的置信度或重要性。</p>
+<p>【输入参数】
+    in_dim : int
+        输入特征维度，对应融合特征 H 的通道数。</p>
+<pre><code>out_dim : int，默认 1
+    输出特征维度，通常为 1，表示输出单通道权重图。
+
+use_bn : bool，默认 False
+    是否在卷积后使用 Batch Normalization，用于数值稳定。
+</code></pre>
+<p>【输入】
+    H : torch.Tensor
+        融合特征张量
+        - 形状：(B, D, N)
+          B：batch 大小
+          D：输入通道数，对应 in_dim
+          N：点数或采样点数量</p>
+<p>【输出】
+    w : torch.Tensor
+        权重图张量
+        - 形状：(B, 1, N)
+          表示每个点的权重值，范围 [0, 1]
+        - 通过 Sigmoid 压缩得到，越接近 1 表示权重越高。</p>
+<p>【作用说明】
+    该算子对应论文中的 “FC + Sigmoid” 步骤，
+    在融合结构中用于生成特征加权系数，
+    使网络能自适应地调整 LiDAR 与图像特征的贡献比例。</p>
+
+              <details class="quote">
+                <summary>Source code in <code>fusion_stage\feature_weight_fc.py</code></summary>
+                <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span>
+<span class="normal">20</span>
+<span class="normal">21</span>
+<span class="normal">22</span>
+<span class="normal">23</span>
+<span class="normal">24</span>
+<span class="normal">25</span>
+<span class="normal">26</span>
+<span class="normal">27</span>
+<span class="normal">28</span>
+<span class="normal">29</span>
+<span class="normal">30</span>
+<span class="normal">31</span>
+<span class="normal">32</span>
+<span class="normal">33</span>
+<span class="normal">34</span>
+<span class="normal">35</span>
+<span class="normal">36</span>
+<span class="normal">37</span>
+<span class="normal">38</span>
+<span class="normal">39</span>
+<span class="normal">40</span>
+<span class="normal">41</span>
+<span class="normal">42</span>
+<span class="normal">43</span>
+<span class="normal">44</span>
+<span class="normal">45</span>
+<span class="normal">46</span>
+<span class="normal">47</span>
+<span class="normal">48</span>
+<span class="normal">49</span>
+<span class="normal">50</span>
+<span class="normal">51</span>
+<span class="normal">52</span>
+<span class="normal">53</span>
+<span class="normal">54</span>
+<span class="normal">55</span>
+<span class="normal">56</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span><span class="w"> </span><span class="nc">FeatureWeightFC</span><span class="p">(</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    FeatureWeightFC 算子（权重图生成层）</span>
+<span class="sd">    ----------------------------------</span>
+<span class="sd">    【功能说明】</span>
+<span class="sd">        该算子用于在 Li-Fusion 模块中，根据融合特征 H 生成逐点权重图 w。</span>
+<span class="sd">        其核心操作为一层 1×1 卷积（等价于逐点全连接），</span>
+<span class="sd">        用于将高维融合特征映射到单通道权重空间，</span>
+<span class="sd">        再通过 Sigmoid 激活函数将输出压缩到 [0, 1] 范围，</span>
+<span class="sd">        以表示每个点或像素的置信度或重要性。</span>
+
+<span class="sd">    【输入参数】</span>
+<span class="sd">        in_dim : int</span>
+<span class="sd">            输入特征维度，对应融合特征 H 的通道数。</span>
+
+<span class="sd">        out_dim : int，默认 1</span>
+<span class="sd">            输出特征维度，通常为 1，表示输出单通道权重图。</span>
+
+<span class="sd">        use_bn : bool，默认 False</span>
+<span class="sd">            是否在卷积后使用 Batch Normalization，用于数值稳定。</span>
+
+<span class="sd">    【输入】</span>
+<span class="sd">        H : torch.Tensor</span>
+<span class="sd">            融合特征张量</span>
+<span class="sd">            - 形状：(B, D, N)</span>
+<span class="sd">              B：batch 大小</span>
+<span class="sd">              D：输入通道数，对应 in_dim</span>
+<span class="sd">              N：点数或采样点数量</span>
+
+<span class="sd">    【输出】</span>
+<span class="sd">        w : torch.Tensor</span>
+<span class="sd">            权重图张量</span>
+<span class="sd">            - 形状：(B, 1, N)</span>
+<span class="sd">              表示每个点的权重值，范围 [0, 1]</span>
+<span class="sd">            - 通过 Sigmoid 压缩得到，越接近 1 表示权重越高。</span>
+
+<span class="sd">    【作用说明】</span>
+<span class="sd">        该算子对应论文中的 “FC + Sigmoid” 步骤，</span>
+<span class="sd">        在融合结构中用于生成特征加权系数，</span>
+<span class="sd">        使网络能自适应地调整 LiDAR 与图像特征的贡献比例。</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">in_dim</span><span class="p">,</span> <span class="n">out_dim</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">use_bn</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+        <span class="n">layers</span> <span class="o">=</span> <span class="p">[</span><span class="n">nn</span><span class="o">.</span><span class="n">Conv1d</span><span class="p">(</span><span class="n">in_dim</span><span class="p">,</span> <span class="n">out_dim</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">bias</span><span class="o">=</span><span class="ow">not</span> <span class="n">use_bn</span><span class="p">)]</span>
+        <span class="k">if</span> <span class="n">use_bn</span><span class="p">:</span>
+            <span class="n">layers</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">nn</span><span class="o">.</span><span class="n">BatchNorm1d</span><span class="p">(</span><span class="n">out_dim</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">fc</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Sequential</span><span class="p">(</span><span class="o">*</span><span class="n">layers</span><span class="p">)</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">H</span><span class="p">:</span> <span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">:</span>
+        <span class="n">w</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">fc</span><span class="p">(</span><span class="n">H</span><span class="p">)</span>
+        <span class="n">w</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">sigmoid</span><span class="p">(</span><span class="n">w</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">w</span>
+</code></pre></div></td></tr></table></div>
+              </details>
+
+
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+
+
+  </div>
+
+    </div>
+
+</div>
+
+
+
+
+  </div>
+
+    </div>
+
+</div><h3 id="_3">对齐模块</h3>
+
+
+<div class="doc doc-object doc-module">
+
+
+
+<a id="fusion_stage.align_fusion_stage.align_fc.fc_align_i"></a>
+    <div class="doc doc-contents first">
+
+
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+
+<div class="doc doc-object doc-class">
+
+
+
+<h2 id="fusion_stage.align_fusion_stage.align_fc.fc_align_i.FCAlignI" class="doc doc-heading">
+            <code>FCAlignI</code>
+
+
+</h2>
+
+
+    <div class="doc doc-contents ">
+            <p class="doc doc-class-bases">
+              Bases: <code><span title="torch.nn.Module">Module</span></code></p>
+
+
+        <h3 id="fusion_stage.align_fusion_stage.align_fc.fc_align_i.FCAlignI--fcaligni">FCAlignI（图像特征通道对齐层）</h3>
+<p>将图像支路的逐点特征 <code>F_I (B, C_i, N)</code> 通过 1×1 卷积映射到统一维度 <code>D</code>，
+以便与 LiDAR 特征 <code>F_P (B, D_p, N)</code> 在后续融合阶段进行模态对齐。</p>
+<hr />
+<h5 id="fusion_stage.align_fusion_stage.align_fc.fc_align_i.FCAlignI--_1">功能说明</h5>
+<p>本算子对应于 Li-Fusion 框架中 “<strong>FC (Image Branch)</strong>” 模块的第一步：
+- 接收图像分支的采样特征 <code>F_I</code>；
+- 将其通道维度从 <code>C_i</code> 映射至融合维度 <code>D</code>；
+- 输出结果与点云特征在维度上对齐，用于后续的逐元素加法融合（<code>li_fusion_add</code>）。</p>
+<p>该层可选使用 BatchNorm 与 ReLU，以增强非线性表达与稳定训练。</p>
+<hr />
+<h5 id="fusion_stage.align_fusion_stage.align_fc.fc_align_i.FCAlignI--args">参数（Args）</h5>
+<ul>
+<li>
+<p><strong>in_i</strong> (<code>int</code>):
+  输入通道数（图像特征维度 <code>C_i</code>）。</p>
+</li>
+<li>
+<p><strong>out_d</strong> (<code>int</code>):
+  输出通道数（目标维度 <code>D</code>），应与点云分支对齐后的特征通道一致。</p>
+</li>
+<li>
+<p><strong>use_bn</strong> (<code>bool</code>, default=<code>True</code>):
+  是否启用 Batch Normalization。启用后有助于训练收敛与特征分布稳定。</p>
+</li>
+<li>
+<p><strong>act</strong> (<code>bool</code>, default=<code>True</code>):
+  是否在卷积后添加 ReLU 激活函数，用于增强非线性建模能力。</p>
+</li>
+</ul>
+<hr />
+<h5 id="fusion_stage.align_fusion_stage.align_fc.fc_align_i.FCAlignI--input">输入（Input）</h5>
+<ul>
+<li><strong>Fi</strong> (<code>torch.Tensor</code>):
+  图像分支采样特征，形状 <strong>(B, C_i, N)</strong></li>
+<li><code>B</code>: 批大小</li>
+<li><code>C_i</code>: 图像特征通道数</li>
+<li><code>N</code>: 点或像素采样数量</li>
+</ul>
+<hr />
+<h5 id="fusion_stage.align_fusion_stage.align_fc.fc_align_i.FCAlignI--output">输出（Output）</h5>
+<ul>
+<li><strong>out</strong> (<code>torch.Tensor</code>):
+  通道对齐后的图像特征，形状 <strong>(B, D, N)</strong>
+  其中 <code>D</code> 为融合维度，对齐到点云特征通道数。</li>
+</ul>
+<hr />
+<h5 id="fusion_stage.align_fusion_stage.align_fc.fc_align_i.FCAlignI--formula">数学关系（Formula）</h5>
+<p>对每个点特征 <code>f_i ∈ ℝ^{C_i}</code>：</p>
+<pre><code>f'_i = ReLU(BN(W · f_i + b))     # 若启用 BN + ReLU
+</code></pre>
+<p>其中 <code>W</code> 为 1×1 卷积的权重矩阵。</p>
+<hr />
+<h5 id="fusion_stage.align_fusion_stage.align_fc.fc_align_i.FCAlignI--_2">典型用途</h5>
+<pre><code class="language-python">align_i = FCAlignI(in_i=64, out_d=128)
+Fi_aligned = align_i(Fi)  # (B, 128, N)
+</code></pre>
+<p>该输出 <code>Fi_aligned</code> 通常直接进入：</p>
+<pre><code class="language-python">H = li_fusion_add(Fp_aligned, Fi_aligned, apply_tanh=True)
+</code></pre>
+<p>用于跨模态特征融合。</p>
+
+              <details class="quote">
+                <summary>Source code in <code>fusion_stage\align_fusion_stage\align_fc\fc_align_i.py</code></summary>
+                <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span>
+<span class="normal">20</span>
+<span class="normal">21</span>
+<span class="normal">22</span>
+<span class="normal">23</span>
+<span class="normal">24</span>
+<span class="normal">25</span>
+<span class="normal">26</span>
+<span class="normal">27</span>
+<span class="normal">28</span>
+<span class="normal">29</span>
+<span class="normal">30</span>
+<span class="normal">31</span>
+<span class="normal">32</span>
+<span class="normal">33</span>
+<span class="normal">34</span>
+<span class="normal">35</span>
+<span class="normal">36</span>
+<span class="normal">37</span>
+<span class="normal">38</span>
+<span class="normal">39</span>
+<span class="normal">40</span>
+<span class="normal">41</span>
+<span class="normal">42</span>
+<span class="normal">43</span>
+<span class="normal">44</span>
+<span class="normal">45</span>
+<span class="normal">46</span>
+<span class="normal">47</span>
+<span class="normal">48</span>
+<span class="normal">49</span>
+<span class="normal">50</span>
+<span class="normal">51</span>
+<span class="normal">52</span>
+<span class="normal">53</span>
+<span class="normal">54</span>
+<span class="normal">55</span>
+<span class="normal">56</span>
+<span class="normal">57</span>
+<span class="normal">58</span>
+<span class="normal">59</span>
+<span class="normal">60</span>
+<span class="normal">61</span>
+<span class="normal">62</span>
+<span class="normal">63</span>
+<span class="normal">64</span>
+<span class="normal">65</span>
+<span class="normal">66</span>
+<span class="normal">67</span>
+<span class="normal">68</span>
+<span class="normal">69</span>
+<span class="normal">70</span>
+<span class="normal">71</span>
+<span class="normal">72</span>
+<span class="normal">73</span>
+<span class="normal">74</span>
+<span class="normal">75</span>
+<span class="normal">76</span>
+<span class="normal">77</span>
+<span class="normal">78</span>
+<span class="normal">79</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span><span class="w"> </span><span class="nc">FCAlignI</span><span class="p">(</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    FCAlignI（图像特征通道对齐层）</span>
+<span class="sd">    ==============================</span>
+
+<span class="sd">    将图像支路的逐点特征 `F_I (B, C_i, N)` 通过 1×1 卷积映射到统一维度 `D`，</span>
+<span class="sd">    以便与 LiDAR 特征 `F_P (B, D_p, N)` 在后续融合阶段进行模态对齐。</span>
+
+<span class="sd">    ---</span>
+<span class="sd">    ### 功能说明</span>
+<span class="sd">    本算子对应于 Li-Fusion 框架中 “**FC (Image Branch)**” 模块的第一步：</span>
+<span class="sd">    - 接收图像分支的采样特征 `F_I`；</span>
+<span class="sd">    - 将其通道维度从 `C_i` 映射至融合维度 `D`；</span>
+<span class="sd">    - 输出结果与点云特征在维度上对齐，用于后续的逐元素加法融合（`li_fusion_add`）。</span>
+
+<span class="sd">    该层可选使用 BatchNorm 与 ReLU，以增强非线性表达与稳定训练。</span>
+
+<span class="sd">    ---</span>
+<span class="sd">    ### 参数（Args）</span>
+<span class="sd">    - **in_i** (`int`):</span>
+<span class="sd">      输入通道数（图像特征维度 `C_i`）。</span>
+
+<span class="sd">    - **out_d** (`int`):</span>
+<span class="sd">      输出通道数（目标维度 `D`），应与点云分支对齐后的特征通道一致。</span>
+
+<span class="sd">    - **use_bn** (`bool`, default=`True`):</span>
+<span class="sd">      是否启用 Batch Normalization。启用后有助于训练收敛与特征分布稳定。</span>
+
+<span class="sd">    - **act** (`bool`, default=`True`):</span>
+<span class="sd">      是否在卷积后添加 ReLU 激活函数，用于增强非线性建模能力。</span>
+
+<span class="sd">    ---</span>
+<span class="sd">    ### 输入（Input）</span>
+<span class="sd">    - **Fi** (`torch.Tensor`):</span>
+<span class="sd">      图像分支采样特征，形状 **(B, C_i, N)**</span>
+<span class="sd">      - `B`: 批大小</span>
+<span class="sd">      - `C_i`: 图像特征通道数</span>
+<span class="sd">      - `N`: 点或像素采样数量</span>
+
+<span class="sd">    ---</span>
+<span class="sd">    ### 输出（Output）</span>
+<span class="sd">    - **out** (`torch.Tensor`):</span>
+<span class="sd">      通道对齐后的图像特征，形状 **(B, D, N)**</span>
+<span class="sd">      其中 `D` 为融合维度，对齐到点云特征通道数。</span>
+
+<span class="sd">    ---</span>
+<span class="sd">    ### 数学关系（Formula）</span>
+<span class="sd">    对每个点特征 `f_i ∈ ℝ^{C_i}`：</span>
+<span class="sd">    ```</span>
+<span class="sd">    f&#39;_i = ReLU(BN(W · f_i + b))     # 若启用 BN + ReLU</span>
+<span class="sd">    ```</span>
+<span class="sd">    其中 `W` 为 1×1 卷积的权重矩阵。</span>
+
+<span class="sd">    ---</span>
+<span class="sd">    ### 典型用途</span>
+<span class="sd">    ```python</span>
+<span class="sd">    align_i = FCAlignI(in_i=64, out_d=128)</span>
+<span class="sd">    Fi_aligned = align_i(Fi)  # (B, 128, N)</span>
+<span class="sd">    ```</span>
+<span class="sd">    该输出 `Fi_aligned` 通常直接进入：</span>
+<span class="sd">    ```python</span>
+<span class="sd">    H = li_fusion_add(Fp_aligned, Fi_aligned, apply_tanh=True)</span>
+<span class="sd">    ```</span>
+<span class="sd">    用于跨模态特征融合。</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">in_i</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">out_d</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">use_bn</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span> <span class="n">act</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+        <span class="n">layers</span> <span class="o">=</span> <span class="p">[</span><span class="n">nn</span><span class="o">.</span><span class="n">Conv1d</span><span class="p">(</span><span class="n">in_i</span><span class="p">,</span> <span class="n">out_d</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">bias</span><span class="o">=</span><span class="ow">not</span> <span class="n">use_bn</span><span class="p">)]</span>
+        <span class="k">if</span> <span class="n">use_bn</span><span class="p">:</span>
+            <span class="n">layers</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">nn</span><span class="o">.</span><span class="n">BatchNorm1d</span><span class="p">(</span><span class="n">out_d</span><span class="p">))</span>
+        <span class="k">if</span> <span class="n">act</span><span class="p">:</span>
+            <span class="n">layers</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">nn</span><span class="o">.</span><span class="n">ReLU</span><span class="p">(</span><span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">net</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Sequential</span><span class="p">(</span><span class="o">*</span><span class="n">layers</span><span class="p">)</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">Fi</span><span class="p">:</span> <span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">:</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">net</span><span class="p">(</span><span class="n">Fi</span><span class="p">)</span>  <span class="c1"># (B, D, N)</span>
+</code></pre></div></td></tr></table></div>
+              </details>
+
+
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+
+
+  </div>
+
+    </div>
+
+</div>
+
+
+
+
+  </div>
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-module">
+
+
+
+<a id="fusion_stage.align_fusion_stage.align_fc.fc_align_p"></a>
+    <div class="doc doc-contents first">
+
+
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+
+<div class="doc doc-object doc-class">
+
+
+
+<h2 id="fusion_stage.align_fusion_stage.align_fc.fc_align_p.FCAlignP" class="doc doc-heading">
+            <code>FCAlignP</code>
+
+
+</h2>
+
+
+    <div class="doc doc-contents ">
+            <p class="doc doc-class-bases">
+              Bases: <code><span title="torch.nn.Module">Module</span></code></p>
+
+
+        <h3 id="fusion_stage.align_fusion_stage.align_fc.fc_align_p.FCAlignP--fcalignp">FCAlignP（点云特征通道对齐层）</h3>
+<p>将点云支路的逐点特征 <code>F_P (B, D_p, N)</code> 通过 1×1 卷积映射到统一维度 <code>D</code>，
+以便与图像分支的特征在通道维度上对齐，为跨模态特征融合做准备。</p>
+<hr />
+<h5 id="fusion_stage.align_fusion_stage.align_fc.fc_align_p.FCAlignP--_1">功能说明</h5>
+<p>本算子对应于 Li-Fusion 框架中 “<strong>FC (Point Branch)</strong>” 模块的第一步：
+- 接收点云分支的特征 <code>F_P</code>；
+- 将其通道维度从 <code>D_p</code> 映射至融合维度 <code>D</code>；
+- 输出结果与图像特征保持维度一致，便于后续执行 <code>li_fusion_add</code>（加法融合 + tanh 激活）。</p>
+<p>该层通过 1×1 卷积（逐点线性变换）完成通道变换，可选地添加 BatchNorm 和 ReLU 激活，
+以增强特征的稳定性与非线性建模能力。</p>
+<hr />
+<h5 id="fusion_stage.align_fusion_stage.align_fc.fc_align_p.FCAlignP--args">参数（Args）</h5>
+<ul>
+<li>
+<p><strong>in_p</strong> (<code>int</code>):
+  输入通道数，对应点云特征维度 <code>D_p</code>。</p>
+</li>
+<li>
+<p><strong>out_d</strong> (<code>int</code>):
+  输出通道数，对齐后的维度 <code>D</code>，应与图像分支通道一致。</p>
+</li>
+<li>
+<p><strong>use_bn</strong> (<code>bool</code>, default=<code>True</code>):
+  是否在卷积后使用 Batch Normalization。启用后可稳定分布并提升收敛速度。</p>
+</li>
+<li>
+<p><strong>act</strong> (<code>bool</code>, default=<code>True</code>):
+  是否添加 ReLU 激活函数，用于增强特征的非线性表达能力。</p>
+</li>
+</ul>
+<hr />
+<h5 id="fusion_stage.align_fusion_stage.align_fc.fc_align_p.FCAlignP--input">输入（Input）</h5>
+<ul>
+<li><strong>Fp</strong> (<code>torch.Tensor</code>):
+  点云分支的逐点特征，形状 <strong>(B, D_p, N)</strong></li>
+<li><code>B</code>: 批大小</li>
+<li><code>D_p</code>: 点云特征通道数</li>
+<li><code>N</code>: 点或采样点数量</li>
+</ul>
+<hr />
+<h5 id="fusion_stage.align_fusion_stage.align_fc.fc_align_p.FCAlignP--output">输出（Output）</h5>
+<ul>
+<li><strong>out</strong> (<code>torch.Tensor</code>):
+  通道对齐后的点云特征，形状 <strong>(B, D, N)</strong>
+  其中 <code>D</code> 为目标融合维度，与图像分支特征一致。</li>
+</ul>
+<hr />
+<h5 id="fusion_stage.align_fusion_stage.align_fc.fc_align_p.FCAlignP--formula">数学关系（Formula）</h5>
+<p>对每个点特征 <code>f_p ∈ ℝ^{D_p}</code>：</p>
+<pre><code>f'_p = ReLU(BN(W · f_p + b))     # 若启用 BN + ReLU
+</code></pre>
+<p>其中 <code>W</code> 为 1×1 卷积权重矩阵。</p>
+<hr />
+<h5 id="fusion_stage.align_fusion_stage.align_fc.fc_align_p.FCAlignP--_2">典型用途</h5>
+<pre><code class="language-python">align_p = FCAlignP(in_p=256, out_d=128)
+Fp_aligned = align_p(Fp)  # (B, 128, N)
+</code></pre>
+<p>该输出 <code>Fp_aligned</code> 通常直接参与跨模态加权融合：</p>
+<pre><code class="language-python">H = li_fusion_add(Fp_aligned, Fi_aligned, apply_tanh=True)
+</code></pre>
+<p>实现 LiDAR–Image 特征的深度融合。</p>
+
+              <details class="quote">
+                <summary>Source code in <code>fusion_stage\align_fusion_stage\align_fc\fc_align_p.py</code></summary>
+                <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span>
+<span class="normal">20</span>
+<span class="normal">21</span>
+<span class="normal">22</span>
+<span class="normal">23</span>
+<span class="normal">24</span>
+<span class="normal">25</span>
+<span class="normal">26</span>
+<span class="normal">27</span>
+<span class="normal">28</span>
+<span class="normal">29</span>
+<span class="normal">30</span>
+<span class="normal">31</span>
+<span class="normal">32</span>
+<span class="normal">33</span>
+<span class="normal">34</span>
+<span class="normal">35</span>
+<span class="normal">36</span>
+<span class="normal">37</span>
+<span class="normal">38</span>
+<span class="normal">39</span>
+<span class="normal">40</span>
+<span class="normal">41</span>
+<span class="normal">42</span>
+<span class="normal">43</span>
+<span class="normal">44</span>
+<span class="normal">45</span>
+<span class="normal">46</span>
+<span class="normal">47</span>
+<span class="normal">48</span>
+<span class="normal">49</span>
+<span class="normal">50</span>
+<span class="normal">51</span>
+<span class="normal">52</span>
+<span class="normal">53</span>
+<span class="normal">54</span>
+<span class="normal">55</span>
+<span class="normal">56</span>
+<span class="normal">57</span>
+<span class="normal">58</span>
+<span class="normal">59</span>
+<span class="normal">60</span>
+<span class="normal">61</span>
+<span class="normal">62</span>
+<span class="normal">63</span>
+<span class="normal">64</span>
+<span class="normal">65</span>
+<span class="normal">66</span>
+<span class="normal">67</span>
+<span class="normal">68</span>
+<span class="normal">69</span>
+<span class="normal">70</span>
+<span class="normal">71</span>
+<span class="normal">72</span>
+<span class="normal">73</span>
+<span class="normal">74</span>
+<span class="normal">75</span>
+<span class="normal">76</span>
+<span class="normal">77</span>
+<span class="normal">78</span>
+<span class="normal">79</span>
+<span class="normal">80</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span><span class="w"> </span><span class="nc">FCAlignP</span><span class="p">(</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    FCAlignP（点云特征通道对齐层）</span>
+<span class="sd">    ==============================</span>
+
+<span class="sd">    将点云支路的逐点特征 `F_P (B, D_p, N)` 通过 1×1 卷积映射到统一维度 `D`，</span>
+<span class="sd">    以便与图像分支的特征在通道维度上对齐，为跨模态特征融合做准备。</span>
+
+<span class="sd">    ---</span>
+<span class="sd">    ### 功能说明</span>
+<span class="sd">    本算子对应于 Li-Fusion 框架中 “**FC (Point Branch)**” 模块的第一步：</span>
+<span class="sd">    - 接收点云分支的特征 `F_P`；</span>
+<span class="sd">    - 将其通道维度从 `D_p` 映射至融合维度 `D`；</span>
+<span class="sd">    - 输出结果与图像特征保持维度一致，便于后续执行 `li_fusion_add`（加法融合 + tanh 激活）。</span>
+
+<span class="sd">    该层通过 1×1 卷积（逐点线性变换）完成通道变换，可选地添加 BatchNorm 和 ReLU 激活，</span>
+<span class="sd">    以增强特征的稳定性与非线性建模能力。</span>
+
+<span class="sd">    ---</span>
+<span class="sd">    ### 参数（Args）</span>
+<span class="sd">    - **in_p** (`int`):</span>
+<span class="sd">      输入通道数，对应点云特征维度 `D_p`。</span>
+
+<span class="sd">    - **out_d** (`int`):</span>
+<span class="sd">      输出通道数，对齐后的维度 `D`，应与图像分支通道一致。</span>
+
+<span class="sd">    - **use_bn** (`bool`, default=`True`):</span>
+<span class="sd">      是否在卷积后使用 Batch Normalization。启用后可稳定分布并提升收敛速度。</span>
+
+<span class="sd">    - **act** (`bool`, default=`True`):</span>
+<span class="sd">      是否添加 ReLU 激活函数，用于增强特征的非线性表达能力。</span>
+
+<span class="sd">    ---</span>
+<span class="sd">    ### 输入（Input）</span>
+<span class="sd">    - **Fp** (`torch.Tensor`):</span>
+<span class="sd">      点云分支的逐点特征，形状 **(B, D_p, N)**</span>
+<span class="sd">      - `B`: 批大小</span>
+<span class="sd">      - `D_p`: 点云特征通道数</span>
+<span class="sd">      - `N`: 点或采样点数量</span>
+
+<span class="sd">    ---</span>
+<span class="sd">    ### 输出（Output）</span>
+<span class="sd">    - **out** (`torch.Tensor`):</span>
+<span class="sd">      通道对齐后的点云特征，形状 **(B, D, N)**</span>
+<span class="sd">      其中 `D` 为目标融合维度，与图像分支特征一致。</span>
+
+<span class="sd">    ---</span>
+<span class="sd">    ### 数学关系（Formula）</span>
+<span class="sd">    对每个点特征 `f_p ∈ ℝ^{D_p}`：</span>
+<span class="sd">    ```</span>
+<span class="sd">    f&#39;_p = ReLU(BN(W · f_p + b))     # 若启用 BN + ReLU</span>
+<span class="sd">    ```</span>
+<span class="sd">    其中 `W` 为 1×1 卷积权重矩阵。</span>
+
+<span class="sd">    ---</span>
+<span class="sd">    ### 典型用途</span>
+<span class="sd">    ```python</span>
+<span class="sd">    align_p = FCAlignP(in_p=256, out_d=128)</span>
+<span class="sd">    Fp_aligned = align_p(Fp)  # (B, 128, N)</span>
+<span class="sd">    ```</span>
+<span class="sd">    该输出 `Fp_aligned` 通常直接参与跨模态加权融合：</span>
+<span class="sd">    ```python</span>
+<span class="sd">    H = li_fusion_add(Fp_aligned, Fi_aligned, apply_tanh=True)</span>
+<span class="sd">    ```</span>
+<span class="sd">    实现 LiDAR–Image 特征的深度融合。</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">in_p</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">out_d</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">use_bn</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span> <span class="n">act</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+        <span class="n">layers</span> <span class="o">=</span> <span class="p">[</span><span class="n">nn</span><span class="o">.</span><span class="n">Conv1d</span><span class="p">(</span><span class="n">in_p</span><span class="p">,</span> <span class="n">out_d</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">bias</span><span class="o">=</span><span class="ow">not</span> <span class="n">use_bn</span><span class="p">)]</span>
+        <span class="k">if</span> <span class="n">use_bn</span><span class="p">:</span>
+            <span class="n">layers</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">nn</span><span class="o">.</span><span class="n">BatchNorm1d</span><span class="p">(</span><span class="n">out_d</span><span class="p">))</span>
+        <span class="k">if</span> <span class="n">act</span><span class="p">:</span>
+            <span class="n">layers</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">nn</span><span class="o">.</span><span class="n">ReLU</span><span class="p">(</span><span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">net</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Sequential</span><span class="p">(</span><span class="o">*</span><span class="n">layers</span><span class="p">)</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">Fp</span><span class="p">:</span> <span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">:</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">net</span><span class="p">(</span><span class="n">Fp</span><span class="p">)</span>  <span class="c1"># (B, D, N)</span>
+</code></pre></div></td></tr></table></div>
+              </details>
+
+
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+
+
+  </div>
+
+    </div>
+
+</div>
+
+
+
+
+  </div>
+
+    </div>
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      <script id="__config" type="application/json">{"base": "..", "features": [], "search": "../assets/javascripts/workers/search.973d3a69.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.f55a23d4.min.js"></script>
+      
+    
+  </body>
+</html>
